@@ -3,6 +3,9 @@ logging:
   loggers:
     com.silenus: DEBUG
 
+server:
+  rootPath: /
+
 database:
   # the name of your JDBC driver
   driverClass: com.mysql.cj.jdbc.Driver

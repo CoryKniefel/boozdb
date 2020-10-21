@@ -2,30 +2,35 @@ package com.boozdb.service;
 
 import com.boozdb.api.model.links.BottleLinks;
 import com.boozdb.api.model.links.BottleListLinks;
-import com.boozdb.api.model.whiskey.BottleListResponse;
-import com.boozdb.api.model.whiskey.BottleResponse;
-import com.boozdb.api.model.whiskey.Bottle;
+import com.boozdb.api.model.bottle.BottleListResponse;
+import com.boozdb.api.model.bottle.BottleResponse;
+import com.boozdb.api.model.bottle.Bottle;
 import com.boozdb.core.constants.DefaultParameterValues;
 import com.boozdb.core.constants.QueryParamToColumnMap;
 import com.boozdb.db.dao.BoozDbDao;
+import com.boozdb.service.views.BoozDbMeta;
 import org.jdbi.v3.core.Jdbi;
 
+import javax.inject.Singleton;
 import javax.ws.rs.core.UriInfo;
 import java.util.*;
 
+@Singleton
 public class BottleService {
 
-    private final BoozDbDao boozbdDao;
+    private final BoozDbDao boozdBDao;
+
+    Map<String, List<String>> categories = new HashMap<>();
 
     public BottleService(Jdbi jdbi)
     {
-        this.boozbdDao = new BoozDbDao(jdbi);
+        this.boozdBDao = new BoozDbDao(jdbi);
     }
 
     public Optional<BottleResponse> getBottleById(String id, UriInfo uriInfo)
     {
         Optional<BottleResponse> response;
-        Optional<Bottle> bottle = boozbdDao.getBottleById(id);
+        Optional<Bottle> bottle = boozdBDao.getBottleById(id);
 
         if(bottle.isPresent())
         {
@@ -39,6 +44,19 @@ public class BottleService {
         }
 
         return response;
+    }
+
+    public BoozDbMeta getBoozDbMetadata()
+    {
+        BoozDbMeta result;
+
+        if(categories.size() == 0)
+        {
+            categories = boozdBDao.getCategoriesMap();
+        }
+
+        result = new BoozDbMeta(categories);
+        return result;
     }
 
     public BottleListResponse search(UriInfo uriInfo,
@@ -58,7 +76,7 @@ public class BottleService {
     {
 
         Map<QueryParamToColumnMap, String> paramMap = getQueryParamMap(category, subCategory, minPrice, maxPrice,minProof, maxProof, minSize, maxSize, minAge, maxAge, page, pageSize);
-        List<Bottle> searchResult =  boozbdDao.search(paramMap);
+        List<Bottle> searchResult =  boozdBDao.search(paramMap);
         BottleListLinks bottleListLinks = new BottleListLinks.Builder(uriInfo).resultSize(searchResult.size()).build();
 
         return new BottleListResponse.Builder().links(bottleListLinks).results(searchResult).build();

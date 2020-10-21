@@ -1,0 +1,13 @@
+<!-- Example single danger button -->
+<div class="btn-group">
+    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{category}}
+    </button>
+    <div class="dropdown-menu">
+        {{#subCategory}}
+            {{> subcategoriesLi}}
+        {{/subCategory}}
+
+    </div>
+</div>
+

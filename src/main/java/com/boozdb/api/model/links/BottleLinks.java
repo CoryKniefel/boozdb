@@ -1,6 +1,6 @@
 package com.boozdb.api.model.links;
 
-import com.boozdb.api.model.whiskey.Bottle;
+import com.boozdb.api.model.bottle.Bottle;
 import com.boozdb.resources.BottleResource;
 
 import javax.ws.rs.core.UriBuilder;

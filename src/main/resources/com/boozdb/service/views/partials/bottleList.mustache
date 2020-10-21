@@ -1,0 +1,48 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Subcategory</th>
+            <th scope="col">Age</th>
+            <th scope="col">Proof</th>
+            <th scope="col">Price</th>
+            <th scope="col">Size</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#bottleListResponse.results}}
+        {{> listItem}}
+        {{/bottleListResponse.results}}
+        </tbody>
+        <nav aria-label="Search results navigation">
+        <ul class="pagination justify-content-center">
+
+            {{^bottleListResponse.bottleListLinks.internal.pagination.last}}
+                <li class="page-item disabled">
+                    <a class="page-link" href="/{{bottleListResponse.links.internal.pagination.last}}" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+            {{/bottleListResponse.bottleListLinks.internal.pagination.last}}
+
+            {{#bottleListResponse.bottleListLinks.internal.pagination.last}}
+                <li class="page-item"><a class="page-link" href="{{bottleListResponse.bottleListLinks.internal.pagination.last}}" tabindex="-1" aria-disabled="true">Previous</a></li>
+            {{/bottleListResponse.bottleListLinks.internal.pagination.last}}
+
+            {{^bottleListResponse.bottleListLinks.internal.pagination.next}}
+                <li class="page-item disabled">
+                    <a class="page-link" href="/{{bottleListResponse.bottleListLinks.internal.pagination.next}}" tabindex="100" aria-disabled="true">Next</a>
+                </li>
+            {{/bottleListResponse.bottleListLinks.internal.pagination.next}}
+
+            {{#bottleListResponse.bottleListLinks.internal.pagination.next}}
+                <li class="page-item"><a class="page-link" href="{{bottleListResponse.bottleListLinks.internal.pagination.next}}" tabindex="100" aria-disabled="true">Next</a></li>
+            {{/bottleListResponse.bottleListLinks.internal.pagination.next}}
+
+
+        </ul>
+    </nav>
+
+    </table>
+
+</div>
