@@ -1,4 +1,4 @@
-package com.boozdb.api.model.whiskey;
+package com.boozdb.api.model.bottle;
 
 import com.boozdb.api.model.links.BottleLinks;
 

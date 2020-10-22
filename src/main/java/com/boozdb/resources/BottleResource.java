@@ -1,8 +1,8 @@
 package com.boozdb.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import com.boozdb.api.model.whiskey.BottleListResponse;
-import com.boozdb.api.model.whiskey.BottleResponse;
+import com.boozdb.api.model.bottle.BottleListResponse;
+import com.boozdb.api.model.bottle.BottleResponse;
 import com.boozdb.service.BottleService;
 import org.jdbi.v3.core.Jdbi;
 
@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.Optional;
 
-@Path("/bottle")
+@Path("/api/bottle")
 @Produces(MediaType.APPLICATION_JSON)
 public class BottleResource {
 

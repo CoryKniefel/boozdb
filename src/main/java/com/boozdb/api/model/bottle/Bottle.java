@@ -1,4 +1,4 @@
-package com.boozdb.api.model.whiskey;
+package com.boozdb.api.model.bottle;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonGenerator;

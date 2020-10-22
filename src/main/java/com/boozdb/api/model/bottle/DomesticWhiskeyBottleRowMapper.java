@@ -1,4 +1,4 @@
-package com.boozdb.api.model.whiskey;
+package com.boozdb.api.model.bottle;
 
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;

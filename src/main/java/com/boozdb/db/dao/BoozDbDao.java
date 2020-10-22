@@ -1,10 +1,11 @@
 package com.boozdb.db.dao;
 
-import com.boozdb.api.model.whiskey.Bottle;
-import com.boozdb.api.model.whiskey.DomesticWhiskeyBottleRowMapper;
+import com.boozdb.api.model.bottle.Bottle;
+import com.boozdb.api.model.bottle.DomesticWhiskeyBottleRowMapper;
 import com.boozdb.core.constants.QueryParamToColumnMap;
 import org.jdbi.v3.core.Jdbi;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -36,6 +37,30 @@ public class BoozDbDao {
         return result;
     }
 
+    public long getMaxPrice()
+    {
+        return 1000; //todo actually query for highest price
+    }
+
+    public Map<String, List<String>>  getCategoriesMap()
+    {
+        Map<String, List<String>> result = new HashMap<>();
+        String temp = "SELECT distinct category FROM olcc2.bottles";
+
+        List<String> categoryList = jdbi.withHandle(handle -> handle.createQuery(temp)
+                .map((rs, col, ctx) -> rs.getString(col)).list());
+
+        for(String cat : categoryList)
+        {
+            String catQuery = String.format("SELECT distinct subCategory FROM bottles where category = '%s'", cat);
+            List<String> subs = jdbi.withHandle(handle -> handle.createQuery(catQuery).map((rs, col, ctx) -> rs.getString(col)).list());
+            result.put(cat, subs);
+        }
+
+        return result;
+
+    }
+
     public List<Bottle> search(Map<QueryParamToColumnMap, String> paramMap) {
 
         StringBuilder queryBuilder = new StringBuilder("select * from bottles");
@@ -53,9 +78,7 @@ public class BoozDbDao {
                 handle.createQuery(fullQuery)
                         .map(new DomesticWhiskeyBottleRowMapper())
                         .list());
-
         return result;
-
     }
 
     /**
@@ -101,10 +124,8 @@ public class BoozDbDao {
                 result.append(temp);
             }
             count++;
-
         }
 
         return result.toString();
-
     }
 }
