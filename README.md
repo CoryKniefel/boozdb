@@ -1,11 +1,11 @@
-# BoozDb
+# BoozeDb
 
 Have you always wanted a single, definitive, source of truth of all the hard liquors available on the market?  
 
-Your wish has come true. BoozDb brings a user friendly api to the web for anyone that is interested 
+Your wish has come true. BoozeDb brings a user friendly api to the web for anyone that is interested 
 the distilled spirits market offerings.  
 
-BoozDb can be used in lifestyle, social media, and mixoligy references. And so on, and so forth. 
+BoozeDb can be used in lifestyle, social media, and mixoligy references. And so on, and so forth. 
 
 ## About this project
 A practice project using [Dropwizard](https://www.dropwizard.io/en/latest/), which "pulls together stable, 
