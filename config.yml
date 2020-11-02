@@ -17,7 +17,7 @@ database:
   password: changeit
 
   # the JDBC URL
-  url: jdbc:mysql://localhost/olcc2?serverTimezone=UTC
+  url: jdbc:mysql://host.docker.internal/olcc2?serverTimezone=UTC
 
   # any properties specific to your JDBC driver:
   properties:
