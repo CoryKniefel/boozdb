@@ -4,20 +4,24 @@ logging:
     com.silenus: DEBUG
 
 server:
-  rootPath: /
+  type: simple
+  applicationContextPath: /
+  connector:
+    type: http
+    port: 80
 
 database:
   # the name of your JDBC driver
   driverClass: com.mysql.cj.jdbc.Driver
 
   # the username
-  user: cory
+  user: boozedbApp
 
   # the password
-  password: changeit
+  password: 79KGSmHEJbn`2(5g
 
   # the JDBC URL
-  url: jdbc:mysql://host.docker.internal/olcc2?serverTimezone=UTC
+  url: jdbc:mysql://boozedb-test.czwbmp9clojp.us-west-2.rds.amazonaws.com/olcc2?serverTimezone=UTC
 
   # any properties specific to your JDBC driver:
   properties:
@@ -39,7 +43,7 @@ database:
   maxSize: 32
 
   # whether or not idle connections should be validated
-  checkConnectionWhileIdle: false
+  checkConnectionWhileIdle: true
 
   # the amount of time to sleep between runs of the idle connection validation, abandoned cleaner and idle pool resizing
   evictionInterval: 10s

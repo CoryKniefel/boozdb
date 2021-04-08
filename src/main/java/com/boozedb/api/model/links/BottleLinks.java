@@ -110,7 +110,7 @@ public class BottleLinks {
                     .queryParam("category", bottle.category)
                     .queryParam("subCategory", bottle.subCategory)
                     .queryParam("minProof", bottle.proof)
-                    .queryParam("maxProof", bottle.price)
+                    .queryParam("maxProof", bottle.proof)
                     .build();
             search.put("ofSameProof", ofSameCategory.toASCIIString());
             return this;
