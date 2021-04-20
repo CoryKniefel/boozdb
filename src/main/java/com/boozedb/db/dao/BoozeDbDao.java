@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public class BoozeDbDao {
 
+    private static final String QUERY_BY_ID = "select * from bottles where id = ?";
     private final Jdbi jdbi;
 
     public BoozeDbDao(Jdbi jdbi)
@@ -22,10 +23,10 @@ public class BoozeDbDao {
     public Optional<Bottle> getBottleById(String id)
     {
         Optional<Bottle> result;
-        String temp = String.format("select * from bottles where id = \"%s\"", id);
         try
         {
-            result = jdbi.withHandle(handle -> handle.createQuery(temp)
+            result = jdbi.withHandle(handle -> handle.createQuery(QUERY_BY_ID)
+                    .bind(0, id)
                     .setMaxRows(1)
                     .map(new DomesticWhiskeyBottleRowMapper())
                     .findFirst());
@@ -106,6 +107,7 @@ public class BoozeDbDao {
         StringBuilder result = new StringBuilder();
 
         int count = 0;
+
         for(QueryParamToColumnMap q : paramMap.keySet())
         {
             if(q.equals(QueryParamToColumnMap.PAGE_OFFSET) | q.equals(QueryParamToColumnMap.PAGE_SIZE))
